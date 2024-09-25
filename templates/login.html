@@ -1,0 +1,34 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block corpo %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+    
+        
+      <form method="post" action="{% url 'login' %}" style="background-color: rgb(17, 187, 235); padding: 20px; border-radius: 8px;margin-top: 5rem;" >
+        {% csrf_token %}
+        <div class="text-center mb-4">
+          <img src="{% static 'media/img/logo.png' %}" alt="Logo" alt="Logo" class="img-fluid" style="width: 150px; height: 150px;  border-radius: 50%; object-fit: cover;">
+        </div>     
+        <div class="form-group">
+          <label for="exampleInputEmail1">Endereço de email</label>
+          <input type="email" class="form-control" id="email" name="email"aria-describedby="emailHelp" placeholder="Seu email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Senha</label>
+          <input type="password" class="form-control" id="password"  name= 'password'  placeholder="Senha">
+        </div>
+        <div class="form-group form-check">
+          <a href="#"><label class="form-check-label" for="exampleCheck1" style="color: black;">Esqueceu Senha?</label></a>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        
+        <a href="{% url 'cadastro' %}"><button type="button" class="btn btn-primary">Cadastre-se</button></a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

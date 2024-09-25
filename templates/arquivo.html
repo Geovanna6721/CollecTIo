@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+
+</head>
+{% block corpo %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Cadastro de Arquivo</h2>
+  <form method="post" action="{% url 'arquivo' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="capa">Capa do Arquivo</label>
+      <input type="file" class="form-control-file" id="capa" name="capa">
+    </div>
+    
+    <div class="form-group">
+      <label for="titulo">Título</label>
+      <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Insira o título do arquivo" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="autor">Autor</label>
+      <input type="text" class="form-control" id="autor" name="autor" placeholder="Nome do autor" required>
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Descreva o conteúdo do arquivo" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="area_conhecimento">Área de Conhecimento</label>
+      <select class="form-control" id="area_conhecimento" name="area_conhecimento" required>
+        <option value="" disabled selected>Escolha a área</option>
+        <option value="1">Saúde</option>
+        <option value="2">Tecnologia</option>
+        <option value="3">Linguagens</option>
+        <option value="4">Ciências Exatas</option>
+        <option value="5">Ciências Humanas</option>
+        <!-- Adicione outras áreas conforme necessário -->
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="link_arquivo">Link do Arquivo</label>
+      <input type="url" class="form-control" id="link_arquivo" name="link_arquivo" placeholder="Insira o link do arquivo" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Cadastrar Arquivo</button>
+  </form>
+</div>
+{% endblock %}

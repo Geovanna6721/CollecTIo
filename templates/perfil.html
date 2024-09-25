@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+<head>
+
+</head>
+{% block corpo %}
+<div class="container mt-5">
+  <h2>Dados do Usuário</h2>
+  
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">Informações Pessoais</h5>
+          <div class="mb-3">
+              {% if user.perfil %}
+                  <img src="{{ user.perfil.url }}" alt="Foto de Perfil" class="img-thumbnail" style="width: 150px; height: 150px;">
+              {% else %}
+                  <img src="{% static 'path/to/default/image.jpg' %}" alt="Foto de Perfil Padrão" class="img-thumbnail" style="width: 150px; height: 150px;">
+              {% endif %}
+          </div>
+          <p><strong>Nome:</strong> {{ user.first_name }}</p>
+          <p><strong>Sobrenome:</strong>{{request.user.last_name}}</p>
+          <p><strong>E-mail:</strong> {{ user.email }}</p>
+          <p><strong>Matrícula:</strong> {{ user.matricula }}</p>
+          <p><strong>Nome do Curso:</strong> {{ user.curso }}</p>
+          <p><strong>Gênero:</strong> {{ user.get_genero_usuario_display }}</p>
+      </div>
+  </div><br><br><br>
+  <a href="{% url 'arquivo' %}"><button type="submit" class="btn btn-primary">Inserir Novo Arquivo</button><br><br></a>
+  <h3>Arquivos Postados</h3>
+  <div class="container" style="margin-top: 60px;">
+    <div class="row"> <!-- A linha que agrupa os cards -->
+      {% for arquivo in arquivos %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- 4 colunas em telas grandes -->
+          <div class="card w-100" style="min-height: 100%;">
+            <img class="card-img-top" src="{{ arquivo.capa.url }}" alt="Imagem de capa do card" style="height: 150px; object-fit: cover;">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ arquivo.titulo }}</h5>
+              <p class="card-text flex-grow-1">
+                {{ arquivo.descricao|slice:":100" }}
+              </p>            
+            </div>
+            <div class="card-footer">
+              <a href="{{ arquivo.upload }}" class="btn btn-primary btn-block">Download</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12">
+          <p class="list-group-item">Nenhum arquivo postado.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+{% endblock %}

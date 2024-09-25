@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+
+    <title>Colecctio</title>
+    <!-- Só uma imagem -->
+  <nav class="navbar" style="background-color: rgb(17, 187, 235);">
+    <a class="navbar-brand" href="#">
+      <img  src="{% static 'media/img/logo.png' %}" width="70" height="70" alt="logo do site">
+    </a>
+    
+    <form class="form-inline">
+      <!-- <button class="btn btn-light my-2 my-sm-0" type="submit">Sair</button> -->
+      <input class="form-control mr-sm-1" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+      <button class="btn btn-light" type="submit" style="background-color: white;margin: 15px;">Pesquisar</button> 
+      <div class="dropdown ml-auto" style="float: right;">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+        {% if user.is_authenticated %}
+        <a class="dropdown-item" href="{% url 'home' %}">Home</a>
+        <a class="dropdown-item" href="{% url 'perfil' request.user.id %}">Meu Perfil</a>
+        <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+
+        {% endif %}
+
+        
+    </form>
+    
+  </nav>
+  </head>
+  <body>
+    {% block corpo %}
+
+    {% endblock%}
+
+  </body>
+</html>
